@@ -1,0 +1,267 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <title>GlassFit</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdV1vWkPU2_uOEDlfip5b3A9NKr8HauM0&libraries=places"></script>
+
+    <script>
+      function initMap() {
+        // Mendapatkan lokasi pengguna saat ini
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              var userLatLng = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+
+              // Membuat objek peta baru
+              var map = new google.maps.Map(document.getElementById("map"), {
+                center: userLatLng,
+                zoom: 15,
+              });
+
+              // Menambahkan marker pada lokasi pengguna
+              var userMarker = new google.maps.Marker({
+                position: userLatLng,
+                map: map,
+                title: "Lokasi Anda",
+              });
+
+              // Membuat objek pencarian Places
+              var placesService = new google.maps.places.PlacesService(map);
+
+              // Mengatur parameter pencarian
+              var request = {
+                location: userLatLng,
+                radius: "100000", // Jarak pencarian (dalam meter)
+                type: ["optik"], // Tipe tempat yang ingin dicari
+              };
+
+              // Menyimpan referensi info window terakhir yang dibuka
+              var lastInfoWindow;
+
+              // Melakukan pencarian tempat berdasarkan parameter
+              placesService.nearbySearch(request, function (results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                  // Menambahkan marker untuk setiap tempat yang ditemukan
+                  results.forEach(function (place) {
+                    var marker = new google.maps.Marker({
+                      position: place.geometry.location,
+                      map: map,
+                      title: place.name,
+                    });
+
+                    // Membuat info window untuk setiap marker
+                    var infoWindow = new google.maps.InfoWindow({
+                      content: place.name,
+                    });
+
+                    // Menambahkan event listener pada marker untuk menampilkan info window saat marker di klik
+                    marker.addListener("click", function () {
+                      // Menutup info window sebelumnya (jika ada)
+                      if (lastInfoWindow) {
+                        lastInfoWindow.close();
+                      }
+
+                      // Menampilkan info window yang baru
+                      infoWindow.open(map, marker);
+
+                      // Menampilkan rute dari lokasi pengguna ke marker yang diklik
+                      var directionsService =
+                        new google.maps.DirectionsService();
+                      var directionsRenderer =
+                        new google.maps.DirectionsRenderer();
+
+                      displayRoute(
+                        directionsService,
+                        directionsRenderer,
+                        userLatLng,
+                        place.geometry.location
+                      );
+
+                      // Menyimpan info window terakhir yang dibuka
+                      lastInfoWindow = infoWindow;
+                    });
+                  });
+                }
+              });
+            },
+            function () {
+              // Handle error jika gagal mendapatkan lokasi pengguna
+              console.error("Gagal mendapatkan lokasi pengguna.");
+            }
+          );
+        } else {
+          // Handle error jika geolocation tidak didukung oleh browser
+          console.error("Geolocation tidak didukung oleh browser.");
+        }
+      }
+
+      function displayRoute(
+        directionsService,
+        directionsRenderer,
+        origin,
+        destination
+      ) {
+        directionsService.route(
+          {
+            origin: origin,
+            destination: destination,
+            travelMode: "DRIVING",
+          },
+          function (response, status) {
+            if (status === "OK") {
+              directionsRenderer.setDirections(response);
+            } else {
+              window.alert("Directions request failed due to " + status);
+            }
+          }
+        );
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        initMap();
+      });
+    </script>
+  </head>
+  <body>
+    <!-- navbar start -->
+    <nav>
+      <img src="src/img/logo.svg" style="width: 70px; height: auto" alt="" />
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <button id="logout">Logout</button>
+      </ul>
+    </nav>
+    <!-- navbar end -->
+
+    <section class="home" id="home">
+      <div class="container">
+        <h1>GlassFIT</h1>
+        <h2>Find Your Perfect Frame</h2>
+        <p>
+          Get your perfect frame by initialize your face shape and find your
+          nearest glasses shops around your locations!
+        </p>
+        <button><a href="#about">Get Started</a></button>
+      </div>
+    </section>
+    <section class="about" id="about">
+      <div class="main-container">
+        <div class="container-content">
+          <h1>About</h1>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur
+            cumque cum totam saepe itaque nihil vel culpa ratione iure, rerum
+            magnam corrupti facere minima voluptates accusamus ullam asperiores
+            autem odit quod laudantium incidunt molestias. Odio quam delectus
+            quis illo rerum quo similique quidem nam sit consectetur? Ad ipsa
+            dolorem ex tempore repudiandae sapiente dolore molestias odit a
+            optio doloribus facilis quibusdam eligendi doloremque quo,
+            perferendis illum ratione voluptatibus, accusamus error non quia.
+            Minus vel quasi ut ipsa, distinctio omnis perferendis delectus,
+            sapiente dolores, laborum officiis optio nisi suscipit odit. Ipsa
+            illo quis aliquid nulla! Rem tempora beatae laboriosam assumenda
+            asperiores. Minus vel quasi ut ipsa, distinctio omnis perferendis
+            delectus, sapiente dolores, laborum officiis optio nisi suscipit
+            odit. Ipsa illo quis aliquid nulla! Rem tempora beatae laboriosam
+            assumenda asperiores
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="product" id="product">
+      <div class="product-short">
+        <div class="card overlay" id="tips">
+          <h1>Tips & Tricks</h1>
+          <img src="src/img/light.svg" alt="lampu" />
+          <p>Give you some tips & tricks about glasses</p>
+        </div>
+        <div class="card kamera overlay" id="faceshape">
+          <h1>Faceshape</h1>
+          <img src="src/img/kamera.svg" alt="kamera" />
+          <p>
+            Use camera to see your faceshape and you get your recommendation
+            type of glasses that fit with your face
+          </p>
+        </div>
+        <div class="card overlay" id="maps">
+          <h1>Maps</h1>
+          <img src="src/img/maps.svg" alt="maps" />
+          <p>Give you recommendation optics and glasses shops around you</p>
+        </div>
+      </div>
+      <div class="tips" id="tips">
+        <h1 class="tips-h1">Tips & Trick</h1>
+        <div class="container-card">
+          <div class="card-tips">
+            <h1>Tips Tampil Percaya Diri Dengan Kacamata</h1>
+            <a
+              href="https://optikjoy.com/tips-tampil-percaya-diri-dengan-kacamata/"
+              >Detail</a
+            >
+          </div>
+          <div class="card-tips">
+            <h1>Tips Sebelum Membeli Kacamata</h1>
+            <a href="https://optikjoy.com/tips-sebelum-membeli-kacamata/"
+              >Detail</a
+            >
+          </div>
+          <div class="card-tips">
+            <h1>Tips Mempunyai Mata Sehat dan Terhindar Dari Mata Minus</h1>
+            <a
+              href="https://optikjoy.com/hal-yang-harus-dihindari-agar-mata-terhindar-dari-minus/"
+              >Detail</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="faceshape" id="faceshape">
+        <h1>Faceshape</h1>
+      </div>
+      <div class="maps" id="map" style="width: 70%; height: 400px; margin: 0 auto;">
+        <h1>Maps</h1>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <div class="container-card">
+        <div class="card-contact">
+          <img src="src/img/icon-profile.png" alt="inu" />
+          <h1>Alifia Salma N.R.</h1>
+          <p>📧</p>
+        </div>
+        <div class="card-contact">
+          <img src="src/img/icon-profile.png" alt="inu" />
+          <h1>Bestin Yap Fortuna</h1>
+          <p>📧</p>
+        </div>
+        <div class="card-contact">
+          <img src="src/img/icon-profile.png" alt="inu" />
+          <h1>Elvaret</h1>
+          <p>📧</p>
+        </div>
+        <div class="card-contact">
+          <img src="src/img/ava-ibnu.jpg" alt="inu" />
+          <h1>Ibnu Bayhaqi</h1>
+          <p>📧 bayhaqiibnu8@gmail.com</p>
+        </div>
+        <div class="card-contact">
+          <img src="src/img/icon-profile.png" alt="inu" />
+          <h1>Amalia Arifah P.S.</h1>
+          <p>📧</p>
+        </div>
+      </div>
+    </section>
+    <footer>Made by 💌 Copyright By Team GlassFIT Bangkit 2023</footer>
+  </body>
+</html>
+-->
