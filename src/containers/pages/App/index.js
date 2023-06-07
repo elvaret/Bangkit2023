@@ -1,20 +1,25 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from '../Dashboard';
 import Login from '../Login';
 import Register from '../Register';
-import {Provider} from 'react-redux';
-import {store} from '../../../config/redux';
+import { Provider } from 'react-redux';
+import { store } from '../../../config/redux';
+// import modelJson from './model.json';
+// import * as tf from '@tensorflow/tfjs';
+// import React, { useEffect, useRef } from 'react';
+
+
 
 function App() {
   return (
-    <Provider store={store}> 
+    <Provider store={store}>
       <Router>
         <div>
           <Routes>
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
