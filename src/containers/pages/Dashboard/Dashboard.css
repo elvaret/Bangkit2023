@@ -15,26 +15,33 @@ html, body {
 
 /* Navbar */
 
-nav {
+.navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 80px;
-    background-color: white;
-    align-items: center;
+    background-color: #fff;
     padding: 20px;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 99;
+  }
+
+.navbar img {
+    width: 70px;
+    height: auto;
+    margin-left: 10px;
 }
 
-nav ul {
+.navbar ul {
     display: flex;
 }
 
-nav ul button {
-    padding: 0 8px;
+.navbar ul button {
+    width: 100px;
+    padding: 0 3px;
     border-radius: 5px;
     background-color: red;
     color: white;
@@ -42,23 +49,24 @@ nav ul button {
     cursor: pointer;
 }
 
-nav ul button:hover {
+.navbar ul button:hover {
     background-color: rgb(219, 5, 5);
 }
 
-nav ul li {
+.navbar ul li {
     list-style: none;
     margin-right: 20px;
 }
 
-nav ul li a {
+.navbar ul li a {
     text-decoration: none;
     color: black;
     font-weight: 400;
     position: relative;
+    font-size: 1.2rem;
 }
 
-nav ul li a::after {
+.navbar ul li a::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -71,7 +79,7 @@ nav ul li a::after {
     transition: all 0.3s ease-in-out;
 }
 
-nav ul li a:hover::after {
+.navbar ul li a:hover::after {
     visibility: visible;
     transform: scaleX(1);
   }
@@ -83,7 +91,7 @@ nav ul li a:hover::after {
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-image: url("img/home.png");
+    background-image: url("./img/home.png");
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 70px;
@@ -155,7 +163,7 @@ nav ul li a:hover::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("img/bg-glassfit.svg");
+    background-image: url("./img/bg-glassfit.svg");
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 90px;
@@ -165,7 +173,7 @@ nav ul li a:hover::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("img/FRAME\ SAPI.svg");
+    background-image: url("./img/FRAME\ SAPI.svg");
     background-size: 85%;
     background-position: center;
     background-repeat: no-repeat;
@@ -211,7 +219,7 @@ nav ul li a:hover::after {
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-glassfit-2.svg");
+    background-image: url("./img/bg-glassfit-2.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-y: -40px;
@@ -230,6 +238,8 @@ nav ul li a:hover::after {
     height: 55vh;
     font-size: 0.8rem;
     position: relative;
+    padding: 30px 0;
+    text-align: justify;
     transition: all 0.3s ease-in-out;
     /* z-index: 99; */
 }
@@ -239,9 +249,14 @@ nav ul li a:hover::after {
     margin-top: -40px;
 }
 
+.card h1 {
+    font-size: 1.5rem;
+}
+
 .card img {
     margin: 30px 0;
 }
+
 
 .card p {
     text-align: center;
@@ -252,6 +267,8 @@ nav ul li a:hover::after {
     height: 65vh;
     margin: 0 40px;
     width: 23%;
+    padding: 10px;
+    text-align: justify;
 }
 
 .card.kamera:hover{
@@ -265,7 +282,7 @@ nav ul li a:hover::after {
 #product .tips{
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-tipsntrick.svg");
+    background-image: url("./img/bg-tipsntrick.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: -20px;
@@ -293,12 +310,20 @@ nav ul li a:hover::after {
 
 .tips .container-card .card-tips {
     width: 80%;
-    height: 30%;
+    height: auto;
     padding: 60px 40px;
     background-color: #D9D9D9;
     border-radius: 50px;
-    font-size: 0.9rem;
+    font-size: 0.4rem;
     margin-bottom: 20px;
+}
+
+.card-tips h1 {
+    font-size: 1.5rem;
+}
+
+.card-tips a {
+    font-size: 0.9rem;
 }
 
 .tips .container-card .card-tips:first-child{
@@ -325,7 +350,7 @@ nav ul li a:hover::after {
 #product .faceshape {
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-faceshape.svg");
+    background-image: url("./img/bg-faceshape.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: -20px;
@@ -334,7 +359,7 @@ nav ul li a:hover::after {
 #product .maps {
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-maps.svg");
+    background-image: url("./img/bg-maps.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: -20px;
@@ -345,7 +370,7 @@ nav ul li a:hover::after {
 #contact {
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-contact.svg");
+    background-image: url("./img/bg-contact.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: -20px;
@@ -401,7 +426,3 @@ nav ul li a:hover::after {
 }
 
 
-/* footer */
-footer {
-    text-align: center;
-}
