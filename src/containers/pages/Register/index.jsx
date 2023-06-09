@@ -43,7 +43,7 @@ function Register(props) {
                 type="text"
                 id="fname"
                 name="fname"
-                placeholder="Enter Your Email"
+                placeholder="Enter Your Full Name"
                 required=""
               />
               <br />
@@ -53,7 +53,7 @@ function Register(props) {
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Enter Your Password"
+                placeholder="Enter Your Username"
                 required=""
               />
               <br />
