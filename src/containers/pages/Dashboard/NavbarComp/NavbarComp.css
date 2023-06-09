@@ -23,7 +23,7 @@ html, body {
     height: 80px;
     background-color: #fff;
     padding: 20px;
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     z-index: 99;
@@ -33,11 +33,12 @@ html, body {
 .navbar img {
     width: 70px;
     height: auto;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .navbar ul {
     display: flex;
+    margin: 0 20px 0 0;
 }
 
 .navbar ul button {

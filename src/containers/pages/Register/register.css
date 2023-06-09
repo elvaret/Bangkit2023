@@ -22,22 +22,29 @@ html, body {
 }
 
 #register .container {
-    width: 50%;
-    height: 100vh;
-    background-color: white;
+    width: 40%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     align-items: center;
 }
 
 #register .container .container-register {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    background-color: #fff;
-    height: 80vh;
+    background-color: none;
+    height: 70vh;
+    /* text-align: center; */
 }
+
+.form {
+    margin-left: 11.5%;
+}
+
 
 button, input {
     width: 400px;
@@ -95,4 +102,25 @@ input::placeholder {
 
 .button-signup:hover {
     background-color: rgba(98, 129, 137, 0.7);
+}
+
+#register .b1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #000;
+}
+
+
+#register .b1 img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+#register .b1 .tbutton {
+    font-size: 18px;
+    margin: 0 0 0 10px;
 }
