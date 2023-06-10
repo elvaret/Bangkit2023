@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { loginUserAPI } from '../../../config/redux/action';
 import Button from '../../../components/atoms/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
 import IconGoogle from './img/google-icon.svg';
 import LineOr from './img/or.svg'; 
+
 
 function Login(props) {
     const [email, setEmail] = useState('');
@@ -70,7 +71,7 @@ function Login(props) {
                         />
                         <div className="createNow">
                             <p>
-                                You don't have an account? <span><a href="../Register/index.js">Create Now</a></span>
+                                You don't have an account? <span><Link to="/register">Create Now</Link></span>
                             </p>
                         </div>
                         <Button type="submit" title="Log In" loading={props.isLoading} />

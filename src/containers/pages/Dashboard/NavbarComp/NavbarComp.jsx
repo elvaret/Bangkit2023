@@ -1,6 +1,7 @@
 import React from "react";
 import './NavbarComp.css';
 import logo from '../img/logo.svg';
+import { Link } from 'react-router-dom';
 
 const NavbarComp = () => {
     return(
@@ -12,7 +13,9 @@ const NavbarComp = () => {
             <li><a href="#about">About</a></li>
             <li><a href="#product">Product</a></li>
             <li><a href="#contact">Contact</a></li>
-            <button id="logout">Log Out</button>
+            <button id="logout">
+              <Link to="/login" className="logout-link">Log Out</Link>
+            </button>          
           </ul>
         </nav>
         </div>
