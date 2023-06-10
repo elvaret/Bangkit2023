@@ -86,3 +86,8 @@ html, body {
     visibility: visible;
     transform: scaleX(1);
   }
+
+.logout-link {
+    color: black;
+    text-decoration: none;
+}
