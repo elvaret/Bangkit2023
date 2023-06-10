@@ -46,9 +46,11 @@ const ProductComp = () => {
             <h1>Faceshape</h1>
           </div>
           <div className="maps" id="maps">
-            <h1>Maps</h1>
-          </div>
-        </section>
+          <h1>Maps</h1>
+          <MapComp />
+        </div>
+      </section>
+      <br></br>
         </div>
     )
 }
