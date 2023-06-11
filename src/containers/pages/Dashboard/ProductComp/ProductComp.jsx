@@ -3,6 +3,7 @@ import '../Dashboard.css';
 import lightIcon from '../img/light.svg';
 import kameraIcon from '../img/kamera.svg';
 import mapsIcon from '../img/maps.svg';
+import MapComp from './MapComp.jsx';
 
 const ProductComp = () => {
     return(

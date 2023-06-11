@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { loginUserAPI } from '../../../config/redux/action';
+import { loginUserAPI, SigninWithGoogle } from '../../../config/redux/action';
 import Button from '../../../components/atoms/Button';
 import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
 import IconGoogle from './img/google-icon.svg';
 import LineOr from './img/or.svg'; 
-
 
 function Login(props) {
     const [email, setEmail] = useState('');
@@ -35,13 +34,27 @@ function Login(props) {
         }
     };
 
+    const handleGoogleLogin = async () => {
+        const res = await props.signinWithGoogle().catch((err) => err);
+        if (res) {
+            console.log('login success');
+            setEmail('');
+            setPassword('');
+            navigate('/dashboard', { replace: true });
+        } else {
+            console.log('login failed');
+        }
+    };
+
+
+
     return (
         <section id="login" className="login">
             <div className="container">
                 <div className="container-login">
                     <h1>Log In</h1>
                     <p className="p1">Continue with Google or enter your details.</p>
-                    <button className="b1">
+                    <button className="b1" onClick={handleGoogleLogin}>
                         <img src={IconGoogle} alt="" />
                         <div className="tbutton">Log In with Google</div>
                     </button>
@@ -88,6 +101,7 @@ const reduxState = (state) => ({
 
 const reduxDispatch = (dispatch) => ({
     loginAPI: (data) => dispatch(loginUserAPI(data)),
+    signinWithGoogle: () => dispatch(SigninWithGoogle()), 
 });
 
 export default connect(reduxState, reduxDispatch)(Login);

@@ -1,4 +1,4 @@
-import {getAuth, createUserWithEmailAndPassword} from '../../firebase';
+import {getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider} from '../../firebase';
 import {signInWithEmailAndPassword } from '../../firebase';
 
 export const actionUserName=()=>(dispatch)=>{
@@ -58,4 +58,41 @@ export const loginUserAPI = (data) => (dispatch) => {
     })
 
 }
+
+export const SigninWithGoogle = () => (dispatch) => {
+    return new Promise((resolve, reject) => {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+  
+      dispatch({ type: 'CHANGE_LOADING', value: true });
+  
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // Berhasil masuk dengan akun Google
+          const user = result.user;
+          const dataUser = {
+            email: user.email,
+            uid: user.uid,
+            emailVerified: user.emailVerified,
+          };
+          console.log('success: ', dataUser);
+  
+          dispatch({ type: 'CHANGE_LOADING', value: false });
+          dispatch({ type: 'CHANGE_ISLOGIN', value: true });
+          dispatch({ type: 'CHANGE_USER', value: dataUser });
+  
+          resolve(true);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+  
+          dispatch({ type: 'CHANGE_LOADING', value: false });
+          dispatch({ type: 'CHANGE_ISLOGIN', value: false });
+  
+          reject(false);
+        });
+    });
+  };
 
