@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../../components/atoms/Button';
 import { connect } from 'react-redux';
-import { registerUserAPI } from '../../../config/redux/action';
+import { registerUserAPI, SigninWithGoogle } from '../../../config/redux/action';
 import './register.css';
 import { useNavigate } from 'react-router-dom';
 import IconGoogle from './img/google-icon.svg';
@@ -29,6 +29,18 @@ function Register(props) {
         navigate('/login', { replace: true });
       }
     };
+
+    const handleGoogleLogin = async () => {
+      const res = await props.signinWithGoogle().catch((err) => err);
+      if (res) {
+          console.log('login success');
+          setEmail('');
+          setPassword('');
+          navigate('/dashboard', { replace: true });
+      } else {
+          console.log('login failed');
+      }
+  };
   
     return (
       <section id="register" className="register">
@@ -82,7 +94,7 @@ function Register(props) {
               <Button type="submit" title="Sign Up" Loading={props.isLoading} />
             </form>
             <img src="src/img/or.svg" style={{ width: 200 }} alt="" /> <br />
-            <button className="b1">
+            <button className="b1" onClick={handleGoogleLogin}>
               <img src={IconGoogle} alt="Icon Google" />
               <p className="tbutton">Sign Up with Google</p>
             </button>
@@ -99,7 +111,8 @@ function Register(props) {
   });
   
   const reduxDispatch = (dispatch) => ({
-    registerAPI: (data) => dispatch(registerUserAPI(data))
+    registerAPI: (data) => dispatch(registerUserAPI(data)),
+    signinWithGoogle: () => dispatch(SigninWithGoogle()), 
   });
   
   export default connect(reduxState, reduxDispatch)(Register);
