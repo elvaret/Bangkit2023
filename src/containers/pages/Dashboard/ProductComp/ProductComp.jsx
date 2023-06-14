@@ -4,6 +4,7 @@ import MapComp from "./MapComp";
 import lightIcon from "../img/light.svg";
 import kameraIcon from "../img/kamera.svg";
 import mapsIcon from "../img/maps.svg";
+import WebcamComponent from "./WebcamComponent";
 
 const ProductComp = () => {
   return (
@@ -54,6 +55,7 @@ const ProductComp = () => {
         </div>
         <div className="faceshape" id="faceshape">
           <h1>Faceshape</h1>
+          <WebcamComponent />
         </div>
         <div className="maps" id="maps">
           <h1>Maps</h1>
