@@ -3,14 +3,16 @@ import {
   GoogleMap,
   useJsApiLoader,
   Autocomplete,
+  Marker,
+  InfoWindow,
 } from "@react-google-maps/api";
 
 const containerStyle = {
   width: "70%",
   height: "70vh",
-  margin: '0 auto',
-  borderRadius: '30px',
-  border: '10px solid #F2DA7A',
+  margin: "0 auto",
+  borderRadius: "30px",
+  border: "10px solid #F2DA7A",
 };
 
 function MapComp() {
@@ -21,7 +23,10 @@ function MapComp() {
   });
 
   const [map, setMap] = useState(null);
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [center, setCenter] = useState(null);
+  const [markers, setMarkers] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [opticalStores, setOpticalStores] = useState([]);
   const autocompleteRef = useRef(null);
 
   const onLoad = React.useCallback(function callback(map) {
@@ -32,18 +37,36 @@ function MapComp() {
     setMap(null);
   }, []);
 
-  const onPlaceChanged = () => {
-    const place = autocompleteRef.current.getPlace();
-    if (place && place.geometry) {
-      const location = {
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
+  const findNearestOpticalStores = (location) => {
+    if (window.google && window.google.maps) {
+      const service = new window.google.maps.places.PlacesService(map);
+      const request = {
+        location: location,
+        radius: 10000, // Jarak pencarian (dalam meter)
+        keyword: "optik", // Kata kunci pencarian (misalnya "optical store" untuk optik kacamata)
       };
-      setCenter(location);
-      map.panTo(location);
-      map.setZoom(12);
-    } else {
-      console.log("Place not found");
+
+      service.nearbySearch(request, (results, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          const opticalStoreData = results.map((opticalStore) => ({
+            id: opticalStore.place_id,
+            name: opticalStore.name,
+            address: opticalStore.vicinity,
+            location: {
+              lat: opticalStore.geometry.location.lat(),
+              lng: opticalStore.geometry.location.lng(),
+            },
+          }));
+
+          setOpticalStores(opticalStoreData);
+
+          // Menampilkan marker pada setiap hasil optik yang ditemukan
+          const markerData = opticalStoreData.map(
+            (opticalStore) => opticalStore.location
+          );
+          setMarkers(markerData);
+        }
+      });
     }
   };
 
@@ -56,6 +79,14 @@ function MapComp() {
             lng: position.coords.longitude,
           };
           setCenter(userLocation);
+          if (map) {
+            map.panTo(userLocation);
+            map.setZoom(12);
+          }
+          setMarkers([userLocation]);
+
+          // Mencari lokasi optik kacamata terdekat berdasarkan lokasi pengguna
+          findNearestOpticalStores(userLocation);
         },
         (error) => {
           console.error("Error getting user location:", error);
@@ -64,7 +95,11 @@ function MapComp() {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, [map]);
+
+  const onMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
 
   return isLoaded ? (
     <GoogleMap
@@ -76,7 +111,7 @@ function MapComp() {
     >
       <Autocomplete
         onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-        onPlaceChanged={onPlaceChanged}
+        onPlaceChanged={() => {}}
       >
         <input
           type="text"
@@ -99,6 +134,25 @@ function MapComp() {
           }}
         />
       </Autocomplete>
+
+      {opticalStores.map((store) => (
+        <Marker
+          key={store.id}
+          position={store.location}
+          onClick={() => onMarkerClick(store.location)}
+        >
+          {selectedMarker &&
+            selectedMarker.lat === store.location.lat &&
+            selectedMarker.lng === store.location.lng && (
+              <InfoWindow onCloseClick={() => setSelectedMarker(null)}>
+                <div>
+                  <h6>{store.name}</h6>
+                  <p>{store.address}</p>
+                </div>
+              </InfoWindow>
+            )}
+        </Marker>
+      ))}
     </GoogleMap>
   ) : (
     <></>
