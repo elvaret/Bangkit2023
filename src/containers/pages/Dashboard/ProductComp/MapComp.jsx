@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GoogleMap, useJsApiLoader, Autocomplete, Marker, InfoWindow } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Autocomplete,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 
 const containerStyle = {
   width: "70%",
@@ -17,7 +23,7 @@ function MapComp() {
   });
 
   const [map, setMap] = useState(null);
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [center, setCenter] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [opticalStores, setOpticalStores] = useState([]);
@@ -55,37 +61,12 @@ function MapComp() {
           setOpticalStores(opticalStoreData);
 
           // Menampilkan marker pada setiap hasil optik yang ditemukan
-          const markerData = opticalStoreData.map((opticalStore) => opticalStore.location);
+          const markerData = opticalStoreData.map(
+            (opticalStore) => opticalStore.location
+          );
           setMarkers(markerData);
         }
       });
-    }
-  };
-
-  const onPlaceChanged = () => {
-    const place = autocompleteRef.current.getPlace();
-    if (place && place.geometry) {
-      const location = {
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      };
-      setCenter(location);
-      if (map) {
-        map.panTo(location);
-        map.setZoom(12);
-      }
-      setMarkers([
-        ...markers,
-        {
-          lat: place.geometry.location.lat(),
-          lng: place.geometry.location.lng(),
-        },
-      ]);
-
-      // Mencari lokasi optik kacamata terdekat berdasarkan lokasi yang dipilih
-      findNearestOpticalStores(location);
-    } else {
-      console.log("Place not found");
     }
   };
 
@@ -106,6 +87,11 @@ function MapComp() {
             map.panTo(userLocation);
             map.setZoom(12);
           }
+
+          setMarkers([userLocation]);
+
+          // Mencari lokasi optik kacamata terdekat berdasarkan lokasi pengguna
+
           findNearestOpticalStores(userLocation);
         },
         (error) => {
@@ -115,7 +101,11 @@ function MapComp() {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, [map]);
+
+  const onMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
 
   return isLoaded ? (
     <GoogleMap
@@ -127,7 +117,7 @@ function MapComp() {
     >
       <Autocomplete
         onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-        onPlaceChanged={onPlaceChanged}
+        onPlaceChanged={() => {}}
       >
         <input
           type="text"
@@ -150,31 +140,24 @@ function MapComp() {
           }}
         />
       </Autocomplete>
-      {markers.map((marker, index) => (
+      {opticalStores.map((store) => (
         <Marker
-          key={index}
-          position={marker}
-          onClick={() => onMarkerClick(marker)}
-        />
-      ))}
-      {selectedMarker && (
-        <InfoWindow
-          position={selectedMarker}
-          onCloseClick={() => setSelectedMarker(null)}
+          key={store.id}
+          position={store.location}
+          onClick={() => onMarkerClick(store.location)}
         >
-          <div>
-            {opticalStores.map((store) =>
-              store.location.lat === selectedMarker.lat &&
-              store.location.lng === selectedMarker.lng ? (
-                <div key={store.id}>
-                  <h3>{store.name}</h3>
+          {selectedMarker &&
+            selectedMarker.lat === store.location.lat &&
+            selectedMarker.lng === store.location.lng && (
+              <InfoWindow onCloseClick={() => setSelectedMarker(null)}>
+                <div>
+                  <h6>{store.name}</h6>
                   <p>{store.address}</p>
                 </div>
-              ) : null
+              </InfoWindow>
             )}
-          </div>
-        </InfoWindow>
-      )}
+        </Marker>
+      ))}
     </GoogleMap>
   ) : (
     <></>

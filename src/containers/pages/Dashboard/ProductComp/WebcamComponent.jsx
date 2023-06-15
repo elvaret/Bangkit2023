@@ -2,11 +2,12 @@ import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
 import "./WebcamComponent.css";
-import heartSVG from "./rekomendasi_kacamata/heart.svg";
-import oblongSVG from "./rekomendasi_kacamata/oblong.svg";
-import ovalSVG from "./rekomendasi_kacamata/oval.svg";
-import roundSVG from "./rekomendasi_kacamata/round.svg";
-import squareSVG from "./rekomendasi_kacamata/square.svg";
+
+import heartSVG from "./content/heart.svg";
+import oblongSVG from "./content/oblong.svg";
+import ovalSVG from "./content/oval.svg";
+import roundSVG from "./content/round.svg";
+import squareSVG from "./content/square.svg";
 
 const WebcamComponent = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -70,19 +71,19 @@ const WebcamComponent = () => {
       let faceImage;
       switch (predictionResult.predictedClass) {
         case "Heart":
-          faceImage = <img src={heartSVG} alt="Heart" />;
+          faceImage = <img className="hasil" src={heartSVG} alt="Heart" />;
           break;
         case "Oblong":
-          faceImage = <img src={oblongSVG} alt="Oblong" />;
+          faceImage = <img className="hasil" src={oblongSVG} alt="Oblong" />;
           break;
         case "Oval":
-          faceImage = <img src={ovalSVG} alt="Oval" />;
+          faceImage = <img className="hasil" src={ovalSVG} alt="Oval" />;
           break;
         case "Round":
-          faceImage = <img src={roundSVG} alt="Round" />;
+          faceImage = <img className="hasil" src={roundSVG} alt="Round" />;
           break;
         case "Square":
-          faceImage = <img src={squareSVG} alt="Square" />;
+          faceImage = <img className="hasil" src={squareSVG} alt="Square" />;
           break;
         default:
           faceImage = null;
