@@ -6,8 +6,11 @@ import {
 } from "@react-google-maps/api";
 
 const containerStyle = {
-  width: "1260px",
-  height: "460px",
+  width: "70%",
+  height: "70vh",
+  margin: '0 auto',
+  borderRadius: '30px',
+  border: '10px solid #F2DA7A',
 };
 
 function MapComp() {
