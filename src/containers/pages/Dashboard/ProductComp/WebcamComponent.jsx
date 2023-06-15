@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
-import './WebcamComponent.css';
+import "./WebcamComponent.css";
+import heartSVG from "./rekomendasi_kacamata/heart.svg";
+import oblongSVG from "./rekomendasi_kacamata/oblong.svg";
+import ovalSVG from "./rekomendasi_kacamata/oval.svg";
+import roundSVG from "./rekomendasi_kacamata/round.svg";
+import squareSVG from "./rekomendasi_kacamata/square.svg";
 
 const WebcamComponent = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -21,7 +26,7 @@ const WebcamComponent = () => {
   const captureImage = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     const blob = dataURLtoBlob(imageSrc);
-    const imageFile = new File([blob], 'image.jpg');
+    const imageFile = new File([blob], "image.jpg");
 
     setPredictionResult(null);
     predictImage(imageFile);
@@ -30,9 +35,12 @@ const WebcamComponent = () => {
   const predictImage = async (imageFile) => {
     try {
       const formData = new FormData();
-      formData.append('image', imageFile);
+      formData.append("image", imageFile);
 
-      const response = await axios.post("https://glassfitprediction-slnmoy67ka-et.a.run.app/predict_face", formData);
+      const response = await axios.post(
+        "https://glassfitprediction-slnmoy67ka-et.a.run.app/predict_face",
+        formData
+      );
       const data = response.data;
       const predictedClass = data.predicted_class;
       const probabilities = data.probabilities;
@@ -47,8 +55,8 @@ const WebcamComponent = () => {
   };
 
   const dataURLtoBlob = (dataURL) => {
-    const byteString = atob(dataURL.split(',')[1]);
-    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+    const byteString = atob(dataURL.split(",")[1]);
+    const mimeString = dataURL.split(",")[0].split(":")[1].split(";")[0];
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
@@ -57,29 +65,63 @@ const WebcamComponent = () => {
     return new Blob([ab], { type: mimeString });
   };
 
+  const renderPredictionResult = () => {
+    if (predictionResult && isCameraOpen) {
+      let faceImage;
+      switch (predictionResult.predictedClass) {
+        case "Heart":
+          faceImage = <img src={heartSVG} alt="Heart" />;
+          break;
+        case "Oblong":
+          faceImage = <img src={oblongSVG} alt="Oblong" />;
+          break;
+        case "Oval":
+          faceImage = <img src={ovalSVG} alt="Oval" />;
+          break;
+        case "Round":
+          faceImage = <img src={roundSVG} alt="Round" />;
+          break;
+        case "Square":
+          faceImage = <img src={squareSVG} alt="Square" />;
+          break;
+        default:
+          faceImage = null;
+          break;
+      }
+  
+      if (faceImage) {
+        return (
+          <div className="predict">
+            {faceImage}
+          </div>
+        );
+      }
+    }
+  
+    return null;
+  };
+
   return (
     <div className="container">
       {isCameraOpen ? (
         <div className="container-cam">
-          <Webcam 
-          className="webcam"
-          ref={webcamRef} />
+          <Webcam className="webcam" ref={webcamRef} />
           <div className="button">
-          <button className="take-pic" onClick={captureImage}>Ambil Gambar</button>
-          <button className="close-cam" onClick={closeCamera}>Tutup Kamera</button>
+            <button className="take-pic" onClick={captureImage}>
+              Ambil Gambar
+            </button>
+            <button className="close-cam" onClick={closeCamera}>
+              Tutup Kamera
+            </button>
           </div>
         </div>
       ) : (
-        <button className="open-cam" onClick={openCamera}>Buka Kamera</button>
+        <button className="open-cam" onClick={openCamera}>
+          Buka Kamera
+        </button>
       )}
 
-      {predictionResult && isCameraOpen && (
-        <div className="predict">
-          <h3>Hasil Prediksi:</h3>
-          <p>Your Face is: {predictionResult.predictedClass}</p>
-          {/* <p>Probabilities: {predictionResult.probabilities}</p> */}
-        </div>
-      )}
+      {renderPredictionResult()}
     </div>
   );
 };
