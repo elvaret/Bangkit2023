@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
+import './WebcamComponent.css';
 
 const WebcamComponent = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -31,7 +32,7 @@ const WebcamComponent = () => {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      const response = await axios.post("http://localhost:5000/predict_face", formData);
+      const response = await axios.post("https://glassfitprediction-slnmoy67ka-et.a.run.app/predict_face", formData);
       const data = response.data;
       const predictedClass = data.predicted_class;
       const probabilities = data.probabilities;
@@ -57,19 +58,23 @@ const WebcamComponent = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       {isCameraOpen ? (
-        <div>
-          <Webcam ref={webcamRef} />
-          <button onClick={closeCamera}>Tutup Kamera</button>
-          <button onClick={captureImage}>Ambil Gambar</button>
+        <div className="container-cam">
+          <Webcam 
+          className="webcam"
+          ref={webcamRef} />
+          <div className="button">
+          <button className="take-pic" onClick={captureImage}>Ambil Gambar</button>
+          <button className="close-cam" onClick={closeCamera}>Tutup Kamera</button>
+          </div>
         </div>
       ) : (
-        <button onClick={openCamera}>Buka Kamera</button>
+        <button className="open-cam" onClick={openCamera}>Buka Kamera</button>
       )}
 
       {predictionResult && isCameraOpen && (
-        <div>
+        <div className="predict">
           <h3>Hasil Prediksi:</h3>
           <p>Your Face is: {predictionResult.predictedClass}</p>
           {/* <p>Probabilities: {predictionResult.probabilities}</p> */}

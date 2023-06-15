@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-size: 16px;
+}
+
+.container {
+    width: 100vw;
+    height: 80vh;
+    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 2px 6px 10px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .open-cam,
+.container .close-cam,
+.container .take-pic {
+    background-color: #F2DA7A;
+    font-size: 2rem;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.container .take-pic,
+.container .close-cam {
+    width: 200px;
+    margin: 20px;
+}
+
+.container .open-cam:hover,
+.container .close-cam:hover,
+.container .take-pic:hover {
+    background-color: rgb(175, 175, 175);
+}
+
+
+.container .container-cam {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.container .container-cam .webcam {
+    width: 40vw;
+    height: auto;
+    border-radius: 50px;
+    border: 10px solid #F2DA7A;
+}
+
+.container .container-cam .button {
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+}
+
+.predict {
+    width: 400px;
+    height: auto;
+    background-color: red;
+    margin-left: 100px;
+    padding-left: 50px;
+}
