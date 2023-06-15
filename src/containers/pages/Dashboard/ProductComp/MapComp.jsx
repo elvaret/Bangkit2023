@@ -70,6 +70,10 @@ function MapComp() {
     }
   };
 
+  const onMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -83,9 +87,11 @@ function MapComp() {
             map.panTo(userLocation);
             map.setZoom(12);
           }
+
           setMarkers([userLocation]);
 
           // Mencari lokasi optik kacamata terdekat berdasarkan lokasi pengguna
+
           findNearestOpticalStores(userLocation);
         },
         (error) => {
@@ -115,7 +121,7 @@ function MapComp() {
       >
         <input
           type="text"
-          placeholder="Search location"
+          placeholder="Search location optik"
           style={{
             boxSizing: `border-box`,
             border: `1px solid transparent`,
@@ -134,7 +140,6 @@ function MapComp() {
           }}
         />
       </Autocomplete>
-
       {opticalStores.map((store) => (
         <Marker
           key={store.id}

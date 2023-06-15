@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
 import "./WebcamComponent.css";
+
 import heartSVG from "./content/heart.svg";
 import oblongSVG from "./content/oblong.svg";
 import ovalSVG from "./content/oval.svg";
