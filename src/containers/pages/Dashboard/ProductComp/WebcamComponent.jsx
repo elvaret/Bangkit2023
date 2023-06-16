@@ -107,7 +107,7 @@ const WebcamComponent = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-product">
       {isCameraOpen ? (
         <div className="container-cam">
           <Webcam className="webcam" ref={webcamRef} />

@@ -11,53 +11,55 @@ html, body {
     transition: all 200ms ease-in-out;
 }
 
-.container {
-    width: 100vw;
+.container-product {
+    width: 90vw;
     height: 80vh;
     margin-top: 30px;
     background-image: url('../img/home.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    /* background-size: cover; */
     border-radius: 50px;
     box-shadow: 2px 6px 10px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 100px;
+    margin-left: 80px;
 }
 
-.container .open-cam,
-.container .close-cam,
-.container .take-pic {
+.container-product .open-cam,
+.container-product .close-cam,
+.container-product .take-pic {
     background-color: #F2DA7A;
     font-size: 2rem;
     border-radius: 20px;
     font-size: 16px;
 }
 
-.container .take-pic,
-.container .close-cam {
+.container-product .take-pic,
+.container-product .close-cam {
     width: 200px;
     margin: 20px;
 }
 
-.container .open-cam:hover,
-.container .close-cam:hover,
-.container .take-pic:hover {
+.container-product .open-cam:hover,
+.container-product .close-cam:hover,
+.container-product .take-pic:hover {
     background-color: rgb(175, 175, 175);
 }
 
-.container .open-cam {
+.container-product .open-cam {
     font-size: 3rem;
 }
 
 
-.container .container-cam {
+.container-product .container-cam {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.container .container-cam .webcam {
+.container-product .container-cam .webcam {
     width: 40vw;
     height: auto;
     border-radius: 50px;
@@ -66,7 +68,7 @@ html, body {
     margin-right: 10px;
 }
 
-.container .container-cam .button {
+.container-product .container-cam .button {
     display: flex;
     flex-direction: row;
     margin-left: -120px;

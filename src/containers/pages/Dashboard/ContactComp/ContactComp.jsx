@@ -1,9 +1,10 @@
 import React from "react";
 import '../Dashboard.css';
-import profileIcon from '../img/icon-profile.png';
 import ifaAva from '../img/ava-ifa.jpg';
 import ibnuAva from '../img/ava-ibnu.jpg';
 import elvaret from '../img/elvaret.jpg';
+import fia from '../img/alifia.jpg';
+import bestin from '../img/bestin.jpg';
 
 const ContactComp = () => {
     return (
@@ -12,14 +13,14 @@ const ContactComp = () => {
           <h1 className="judulh1">CONTACT <br />US</h1>
           <div className="container-card">
             <div className="card-contact">
-              <img src={profileIcon} alt="inu" />
+              <img src={fia} alt="inu" />
               <h1>Alifia Salma N.R.</h1>
-              <p>📧</p>
+              <p>📧alifiasalma95@gmail.com</p>
             </div>
             <div className="card-contact">
-              <img src={profileIcon} alt="inu" />
+              <img src={bestin} alt="inu" />
               <h1>Bestin Yap Fortuna</h1>
-              <p>📧</p>
+              <p>📧bestinyap05@gmail.com</p>
             </div>
             <div className="card-contact">
               <img src={elvaret} alt="inu" />
@@ -34,7 +35,7 @@ const ContactComp = () => {
             <div className="card-contact">
               <img src={ifaAva} alt="ifa" />
               <h1>Amalia Arifah P.S.</h1>
-              <p>📧ifasopyan18@gmail.com</p>
+              <p>📧ifaaput@gmail.com</p>
             </div>
           </div>
         </section>
