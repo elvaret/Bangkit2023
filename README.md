@@ -1,8 +1,6 @@
-<div style="display: flex; justify-content: center;">
-    <img 
-         src="/public/LOGOGLASSFIT.png"
-         style="width: 300px; height: auto;">
-<div>
+<div align="center">
+  <img src="https://github.com/elvaret/Bangkit2023/blob/main/public/LOGOGLASSFIT.png">
+</div>
 
 # GlassFIT 
 
