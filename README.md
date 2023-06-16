@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="https://github.com/elvaret/Bangkit2023/blob/main/public/logocoklat.png">
+  <img src="https://github.com/elvaret/Bangkit2023/blob/main/public/logoNew2.svg"
+  style="width: 300px; height: auto;">
 </div>
 
 # GlassFIT 
@@ -19,10 +20,10 @@ GlassFIT is a web-based application that utilizes artificial intelligence to ana
 ### Endpoint for Model
 ```https://glassfitprediction-slnmoy67ka-et.a.run.app/predict_face```
 
-### Link Deploy Model
+### Deploy Model
 ```https://github.com/bayhaqibnu8/ModelML```
     
-### Link Figma        
+### Our Figma Design        
 ```https://www.figma.com/file/wJeiv3tehR52FYODHvsL8y/Website-GlassFit?type=design&node-id=0-1&t=AGZTRFjGMzk4Oa0G-0```
 
 ### ERD Diagram
