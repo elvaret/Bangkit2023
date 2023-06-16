@@ -16,15 +16,16 @@ GlassFIT is a web-based application that utilizes artificial intelligence to ana
 
 ## API
 
-Endpoint for Model
+### Endpoint for Model
 ```https://glassfitprediction-slnmoy67ka-et.a.run.app/predict_face```
 
-Link Deploy Model : https://github.com/bayhaqibnu8/ModelML
-Link Figma        : https://www.figma.com/file/wJeiv3tehR52FYODHvsL8y/Website-GlassFit?type=design&node-id=0-1&t=AGZTRFjGMzk4Oa0G-0
+### Link Deploy Model
+```https://github.com/bayhaqibnu8/ModelML```
+    
+### Link Figma        
+```https://www.figma.com/file/wJeiv3tehR52FYODHvsL8y/Website-GlassFit?type=design&node-id=0-1&t=AGZTRFjGMzk4Oa0G-0```
 
-## ERD Diagram
-
-ERD Diagram: 
+### ERD Diagram
 ```https://drive.google.com/file/d/1UUm9oqM3SsDCVQbbe8yoTvd2goNSXjUm/view?usp=drive_link```
 
 
