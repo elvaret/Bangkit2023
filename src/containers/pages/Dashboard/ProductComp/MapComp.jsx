@@ -43,7 +43,7 @@ function MapComp() {
       const request = {
         location: location,
         radius: 10000, // Jarak pencarian (dalam meter)
-        keyword: "optik", // Kata kunci pencarian (misalnya "optical store" untuk optik kacamata)
+        keyword: "optik",
       };
 
       service.nearbySearch(request, (results, status) => {
@@ -109,31 +109,6 @@ function MapComp() {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      <Autocomplete
-        onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
-        onPlaceChanged={() => {}}
-      >
-        <input
-          type="text"
-          placeholder="Search location"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "0%",
-            top: "10%",
-            marginLeft: "10px",
-          }}
-        />
-      </Autocomplete>
 
       {opticalStores.map((store) => (
         <Marker

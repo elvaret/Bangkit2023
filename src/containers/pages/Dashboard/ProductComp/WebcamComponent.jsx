@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
 import "./WebcamComponent.css";
+
 import heartSVG from "./content/heart.svg";
 import oblongSVG from "./content/oblong.svg";
 import ovalSVG from "./content/oval.svg";
@@ -11,6 +12,7 @@ import squareSVG from "./content/square.svg";
 const WebcamComponent = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [predictionResult, setPredictionResult] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const webcamRef = useRef(null);
 
   const openCamera = () => {
@@ -34,6 +36,7 @@ const WebcamComponent = () => {
 
   const predictImage = async (imageFile) => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("image", imageFile);
 
@@ -51,6 +54,8 @@ const WebcamComponent = () => {
       });
     } catch (error) {
       console.log("Error:", error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,7 +93,7 @@ const WebcamComponent = () => {
           faceImage = null;
           break;
       }
-  
+
       if (faceImage) {
         return (
           <div className="predict">
@@ -97,7 +102,7 @@ const WebcamComponent = () => {
         );
       }
     }
-  
+
     return null;
   };
 
@@ -107,8 +112,8 @@ const WebcamComponent = () => {
         <div className="container-cam">
           <Webcam className="webcam" ref={webcamRef} />
           <div className="button">
-            <button className="take-pic" onClick={captureImage}>
-              Ambil Gambar
+            <button className="take-pic" onClick={captureImage} disabled={isLoading}>
+              {isLoading ? "Loading..." : "Ambil Gambar"}
             </button>
             <button className="close-cam" onClick={closeCamera}>
               Tutup Kamera
