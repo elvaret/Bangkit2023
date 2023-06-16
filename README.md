@@ -1,5 +1,7 @@
-<diiv align ="center">
-    <img src="/public/LOGOGLASSFIT.png">
+<div style="display: flex; justify-content: center;">
+    <img 
+         src="/public/LOGOGLASSFIT.png"
+         style="width: 300px; height: auto;">
 <div>
 
 # GlassFIT 
