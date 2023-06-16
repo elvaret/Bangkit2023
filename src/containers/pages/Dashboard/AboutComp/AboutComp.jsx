@@ -8,7 +8,7 @@ const AboutComp = () => {
                 <div className="main-container">
                     <div className="container-content">
                     <h1>About</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur cumque cum totam saepe itaque nihil vel culpa ratione iure, rerum magnam corrupti facere minima voluptates accusamus ullam asperiores autem odit quod laudantium incidunt molestias. Odio quam delectus quis illo rerum quo similique quidem nam sit consectetur? Ad ipsa dolorem ex tempore repudiandae sapiente dolore molestias odit a optio doloribus facilis quibusdam eligendi doloremque quo, perferendis illum ratione voluptatibus, accusamus error non quia. Minus vel quasi ut ipsa, distinctio omnis perferendis delectus, sapiente dolores, laborum officiis optio nisi suscipit odit. Ipsa illo quis aliquid nulla! Rem tempora beatae laboriosam assumenda asperiores.</p>
+                    <p>GlassFIT is a web-based application that utilizes artificial intelligence to analyze the user's face shape and provide personalized recommendations for suitable glasses. The main objective is to enhance user confidence in wearing glasses by suggesting styles that complement their face shape. Additionally, the app assists users in locating nearby optical shops and aims to foster collaborations with other businesses in the optical industry. By delivering a comprehensive solution, it seeks to inspire other developers to create innovative applications with additional features, ultimately benefiting a wide range of eyeglass users. </p>
                     </div>
                 </div>
             </section>
