@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/elvaret/Bangkit2023/blob/main/public/LOGOGLASSFIT.png">
+  <img src="https://github.com/elvaret/Bangkit2023/blob/main/public/logocoklat.png">
 </div>
 
 # GlassFIT 
