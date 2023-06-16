@@ -6,10 +6,6 @@ import Login from '../Login';
 import Register from '../Register';
 import { Provider } from 'react-redux';
 import { store } from '../../../config/redux';
-// import modelJson from './model.json';
-// import * as tf from '@tensorflow/tfjs';
-// import React, { useEffect, useRef } from 'react';
-
 
 
 function App() {
